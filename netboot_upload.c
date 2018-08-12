@@ -35,12 +35,12 @@ int main(int argc, char **argv)
 	INT_32 recv_len;
 	INT_32 i;
 	
-	if(argc != 3)
+	if(argc != 4)
 	{
 		print_usage(argv[0]);
 		return 1;
 	} 
-	if(access(argv[2], F_OK | R_OK))
+	if(access(argv[3], F_OK | R_OK))
 	{
 		printf("Error: file not found or not accessible\n");
 		return 1;
@@ -53,14 +53,7 @@ int main(int argc, char **argv)
         return 1;
     }
 	naomi_address.sin_family = AF_INET;
-	if( argc > 1)
-	{
-		naomi_address.sin_port = htons(atoi(argv[1]));
-	}
-	else
-	{
-		naomi_address.sin_port = htons(port);
-	}
+	naomi_address.sin_port = htons(atoi(argv[2]));
 
 	if ((socket_fd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) 
 	{
@@ -95,7 +88,7 @@ int main(int argc, char **argv)
 	
 	set_security_keycode(0);
 	
-	upload_file_dimm(argv[2]);
+	upload_file_dimm(argv[3]);
 	
 	restart_host();
 	
@@ -117,8 +110,8 @@ int main(int argc, char **argv)
 */
 void print_usage(char *binary_name)
 {
-	printf("Usage: %s <ip> <game file>\n", binary_name);
-	printf("E.g.: %s 192.168.0.120 TetrisKiwamemichi_v6.bin\n", binary_name);
+	printf("Usage: %s <ip> <port> <game file>\n", binary_name);
+	printf("E.g.: %s 192.168.0.120 10703 TetrisKiwamemichi_v6.bin\n", binary_name);
 }
 
 /*
