@@ -53,7 +53,14 @@ int main(int argc, char **argv)
         return 1;
     }
 	naomi_address.sin_family = AF_INET;
-	naomi_address.sin_port = htons(port);
+	if( argc > 1)
+	{
+		naomi_address.sin_port = htons(atoi(argv[1]));
+	}
+	else
+	{
+		naomi_address.sin_port = htons(port);
+	}
 
 	if ((socket_fd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) 
 	{

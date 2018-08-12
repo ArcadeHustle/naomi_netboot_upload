@@ -1,4 +1,11 @@
-CC = gcc
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	CC = gcc
+endif
+ifeq ($(UNAME_S),Darwin)
+	CC = gcc-7
+endif
+
 HEADERS = crc32.h datatypes.h
 CFLAGS = -O3 -Wall 
 SOURCES = crc32.c netboot_upload.c
