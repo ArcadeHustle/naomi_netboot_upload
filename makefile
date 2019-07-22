@@ -3,7 +3,7 @@ ifeq ($(UNAME_S),Linux)
 	CC = gcc
 endif
 ifeq ($(UNAME_S),Darwin)
-	CC = gcc-7
+	CC = gcc-7 -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/
 endif
 
 HEADERS = crc32.h datatypes.h
